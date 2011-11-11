@@ -1,6 +1,5 @@
 #Usando Decorators
 #Especialmente utiles en entorno web!
-
 def login_required(f):
 	def check_auth(request,*args,**kwargs):
 		session = Session()
