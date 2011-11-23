@@ -1,0 +1,30 @@
+{% extends 'admin.html' %}
+
+{% block new_form %}
+<form method="post">
+    <div class="module_content">
+	    <fieldset>
+		    <label>Post Title</label>
+		    <input type="text" name="title">
+	    </fieldset>
+	    <fieldset>
+		    <label>Content</label>
+		    <textarea rows="12" name="post"></textarea>
+	    </fieldset>
+	    <fieldset>
+		    <label>Tags <small>(comma separated)</small></label>
+		    <input type="text" name="tags" />
+	    </fieldset>
+	    <div class="clear"></div>
+    </div>
+    <footer>
+        <div class="submit_link">
+	        <select>
+		        <option>Draft</option>
+		        <option>Published</option>
+	        </select>
+	        <input type="submit" value="Publish" class="alt_btn">
+        </div>
+    </footer>
+</form>
+{% endblock %}
