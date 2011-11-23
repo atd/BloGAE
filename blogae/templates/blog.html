@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="/static/css/blog.css" type="text/css" media="screen" />
+</head>
+<body>
+
+	<header>
+		<h1>{{ title }}</h1>
+	</header>
+	<nav>
+		<ul>
+		    <li class="selected"><a href="/">All</a></li>
+			<li><a href="/textpost/">Texts</a></li>
+			<li><a href="/photopost/">Photos</a></li>
+			<li><a href="/videopost/">Videos</a></li>
+		</ul>
+	</nav>
+	<section id="intro">
+		<header>
+			<h2>Do you love flowers as much as we do?</h2>
+		</header>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>
+		<img src="/static/img/intro_flower.png" alt="Flower" />
+	</section>
+	
+	<div id="content">
+		<div id="mainContent">
+			<section>
+			    {% for post in posts %}
+				<article class="blogPost">
+					<header>
+						<h2>{{ post.title }}</h2>
+						<p>Posted on <time datetime="{{ post.created.strftime('%Y-%m-%dT%H:%M%Z') }}">{{ post.created.strftime('%Y/%m/%d %H:%M') }}</time> by <a href="#">{{ post.author.nickname() }}</a> - <a href="#comments">{{ post.comment_set.fetch(1000)|length }} comments</a></p>
+					</header>
+					<div>{{ post.toHTML()|safe }}</div>
+				</article>
+				{% endfor %}
+			</section>
+		</div>
+		<aside>
+			<section>
+				<header>
+					<h3>Tags</h3>
+				</header>
+				<ul>
+				    {% for tag in tags %}
+					<li><a href="/?tag={{ tag.tag }}">{{ tag.tag }}</a></li>
+					{% endfor %}
+				</ul>
+			</section>
+		</aside>
+	</div>
+	<footer>
+		<div>
+			<section id="about">
+				<header>
+					<h3>About</h3>
+				</header>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco <a href="#">laboris nisi ut aliquip</a> ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</section>
+			<section id="blogroll">
+				<header>
+					<h3>Blogroll</h3>
+				</header>
+				<ul>
+					<li><a href="#">NETTUTS+</a></li>
+					<li><a href="#">FreelanceSwitch</a></li>
+					<li><a href="#">In The Woods</a></li>
+					<li><a href="#">Netsetter</a></li>
+					<li><a href="#">PSDTUTS+</a></li>
+				</ul>
+			</section>
+			<section id="popular">
+				<header>
+					<h3>Popular</h3>
+				</header>
+				<ul>
+					<li><a href="#">This is the title of a blog post</a></li>
+					<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+					<li><a href="#">Consectetur adipisicing elit, sed do eiusmod</a></li>
+					<li><a href="#">Duis aute irure dolor</a></li>
+					<li><a href="#">Excepteur sint occaecat cupidatat</a></li>
+					<li><a href="#">Reprehenderit in voluptate velit</a></li>
+					<li><a href="#">Officia deserunt mollit anim id est laborum</a></li>
+					<li><a href="#">Lorem ipsum dolor sit amet</a></li>
+				</ul>
+			</section>
+		</div>
+	</footer>
+	
+</body>
+</html>
+
+
+
+
+
+<!--			<section id="comments">-->
+<!--				<h3>Comments</h3>-->
+<!--				<article>-->
+<!--					<header>-->
+<!--						<a href="#">George Washington</a> on <time datetime="2009-06-29T23:35:20+01:00">June 29th 2009 at 23:35</time>-->
+<!--					</header>-->
+<!--					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>-->
+<!--				</article>-->
+<!--				<article>-->
+<!--					<header>-->
+<!--						<a href="#">Benjamin Franklin</a> on <time datetime="2009-06-29T23:40:09+01:00">June 29th 2009 at 23:40</time>-->
+<!--					</header>-->
+<!--					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>-->
+<!--				</article>-->
+<!--				<article>-->
+<!--					<header>-->
+<!--						<a href="#">Barack Obama</a> on <time datetime="2009-06-29T23:59:00+01:00">June 29th 2009 at 23:59</time>-->
+<!--					</header>-->
+<!--					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>-->
+<!--				</article>-->
+<!--			</section>-->
+<!--			<form action="comment/" method="post">-->
+<!--				<h3>Post a comment</h3>-->
+<!--				<p>-->
+<!--					<label for="name">Name</label>-->
+<!--					<input name="name" id="name" type="text" required />-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					<label for="email">E-mail</label>-->
+<!--					<input name="email" id="email" type="email" required />-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					<label for="website">Website</label>-->
+<!--					<input name="website" id="website" type="url" />-->
+<!--				</p>-->
+<!--				<p>-->
+<!--					<label for="comment">Comment</label>-->
+<!--					<textarea name="comment" id="comment" required></textarea>-->
+<!--				</p>-->
+<!--				<p><input type="submit" value="Post comment" /></p>-->
+<!--			</form>-->
+
