@@ -29,6 +29,7 @@ class Entry(polymodel.PolyModel):
     tags = db.StringListProperty()
     hits = db.IntegerProperty(default=0)
     rate = db.FloatProperty(default=float(0))
+    #comments implicit relation one to many with Comment
     
     @property
     def type(self):
@@ -94,7 +95,7 @@ class Comment(db.Model):
     """
         Post comment.
     """
-    entry = db.ReferenceProperty(Entry, required=True)
+    entry = db.ReferenceProperty(Entry, required=True) 	
     created = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
     author = db.UserProperty(auto_current_user_add=True)

@@ -5,8 +5,9 @@ import webapp2
 import webapp2_extras.jinja2
 
 from google.appengine.ext import db
+from google.appengine.api import users
 
-from .models import Entry, TextPost, PhotoPost, VideoPost, Tag
+from .models import Entry, TextPost, PhotoPost, VideoPost, Tag, Comment
 
 class BaseHandler(webapp2.RequestHandler):
     """
@@ -75,3 +76,25 @@ class PhotoPostHandler(IndexHandler):
 class VideoPostHandler(IndexHandler):
     model = VideoPost
             
+class CommentHandler(BaseHandler):
+    """
+        Comment info handler.
+        Supports GET, POST, PUT and DELETE verbs to allow operation over
+        entries.
+    """
+    model = Comment
+
+    def post(self):
+        # get arguments
+        args = {}
+        entry = Entry.get(self.request.get('key'))
+        body = self.request.get('body', None)
+	user = users.get_current_user()
+        
+        if body: args['body'] = body
+        args['entry'] = entry
+        args['author'] = user
+        
+        new_model = self.model(**args)
+        new_model.put()
+        return self.redirect('/')

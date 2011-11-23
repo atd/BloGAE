@@ -35,6 +35,43 @@
 						<p>Posted on <time datetime="{{ post.created.strftime('%Y-%m-%dT%H:%M%Z') }}">{{ post.created.strftime('%Y/%m/%d %H:%M') }}</time> by <a href="#">{{ post.author.nickname() }}</a> - <a href="#comments">{{ post.comment_set.fetch(1000)|length }} comments</a></p>
 					</header>
 					<div>{{ post.toHTML()|safe }}</div>
+			<section id="comments">
+				<h3>Comments</h3>
+				
+			    {% for comment in post.comment_set %}
+
+				<article>
+					<header>
+						<a href="#">{{ comment.author.nickname() }}</a> on <time datetime="2009-06-29T23:40:09+01:00">June 29th 2009 at 23:40</time>
+					</header>
+					<p>{{ comment.body }}</p>
+				</article>
+
+				{% endfor %}
+			</section>
+			<form action="comment/" method="post">
+				<h3>Post a comment</h3>
+				<input name="key" id="comment_post_key" type="hidden" value="{{ post.key()  }}" />
+<!--
+				<p>
+					<label for="name">Name</label>
+					<input name="name" id="name" type="text" required />
+				</p>
+				<p>
+					<label for="email">E-mail</label>
+					<input name="email" id="email" type="email" required />
+				</p>
+				<p>
+					<label for="website">Website</label>
+					<input name="website" id="website" type="url" />
+				</p>-->
+				<p>
+					<label for="comment">Comment</label>
+					<textarea name="body" id="comment_body" required></textarea>
+				</p>
+				<p><input type="submit" value="Post comment" /></p>
+			</form>
+
 				</article>
 				{% endfor %}
 			</section>
@@ -97,45 +134,4 @@
 
 
 
-<!--			<section id="comments">-->
-<!--				<h3>Comments</h3>-->
-<!--				<article>-->
-<!--					<header>-->
-<!--						<a href="#">George Washington</a> on <time datetime="2009-06-29T23:35:20+01:00">June 29th 2009 at 23:35</time>-->
-<!--					</header>-->
-<!--					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>-->
-<!--				</article>-->
-<!--				<article>-->
-<!--					<header>-->
-<!--						<a href="#">Benjamin Franklin</a> on <time datetime="2009-06-29T23:40:09+01:00">June 29th 2009 at 23:40</time>-->
-<!--					</header>-->
-<!--					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>-->
-<!--				</article>-->
-<!--				<article>-->
-<!--					<header>-->
-<!--						<a href="#">Barack Obama</a> on <time datetime="2009-06-29T23:59:00+01:00">June 29th 2009 at 23:59</time>-->
-<!--					</header>-->
-<!--					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>-->
-<!--				</article>-->
-<!--			</section>-->
-<!--			<form action="comment/" method="post">-->
-<!--				<h3>Post a comment</h3>-->
-<!--				<p>-->
-<!--					<label for="name">Name</label>-->
-<!--					<input name="name" id="name" type="text" required />-->
-<!--				</p>-->
-<!--				<p>-->
-<!--					<label for="email">E-mail</label>-->
-<!--					<input name="email" id="email" type="email" required />-->
-<!--				</p>-->
-<!--				<p>-->
-<!--					<label for="website">Website</label>-->
-<!--					<input name="website" id="website" type="url" />-->
-<!--				</p>-->
-<!--				<p>-->
-<!--					<label for="comment">Comment</label>-->
-<!--					<textarea name="comment" id="comment" required></textarea>-->
-<!--				</p>-->
-<!--				<p><input type="submit" value="Post comment" /></p>-->
-<!--			</form>-->
 

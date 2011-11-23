@@ -10,6 +10,7 @@ urls = [
         Route(r'/photopost/', handler='PhotoPostHandler', name='photopost'),
         Route(r'/videopost/', handler='VideoPostHandler', name='videopost'),
         Route(r'/entry/', handler='EntryHandler', name='entry'),
+        Route(r'/comment/', handler='CommentHandler', name='comment')
     ]),
     routes.PathPrefixRoute('/admin', [
         routes.HandlerPrefixRoute('admin.handlers.', [
